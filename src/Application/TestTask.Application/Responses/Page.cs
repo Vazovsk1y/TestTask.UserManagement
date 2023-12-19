@@ -36,17 +36,16 @@ public abstract record Page<T>
 		Items = items;
 		TotalItemsCount = totalItemsCount;
 		PageIndex = pagingOptions?.PageIndex is null ? __StartCountingFrom : pagingOptions.PageIndex;
-		TotalPages = CalculateTotalPages();
+		TotalPages = CalculateTotalPages(pagingOptions, totalItemsCount);
+	}
 
-
-		int CalculateTotalPages()
+	private static int CalculateTotalPages(PagingOptions? pagingOptions, int totalItemsCount) 
+	{
+		if (pagingOptions?.PageSize is null)
 		{
-			if (pagingOptions?.PageSize is null)
-			{
-				return __StartCountingFrom;
-			}
-
-			return totalItemsCount < pagingOptions.PageSize ? __StartCountingFrom : (int)Math.Ceiling(totalItemsCount / (double)pagingOptions.PageSize);
+			return __StartCountingFrom;
 		}
+
+		return totalItemsCount < pagingOptions.PageSize ? __StartCountingFrom : (int)Math.Ceiling(totalItemsCount / (double)pagingOptions.PageSize);
 	}
 }

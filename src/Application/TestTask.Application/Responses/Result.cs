@@ -1,4 +1,5 @@
-﻿namespace TestTask.Application.Responses;
+﻿
+namespace TestTask.Application.Responses;
 
 public record Result
 {
