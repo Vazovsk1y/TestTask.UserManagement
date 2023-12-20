@@ -8,7 +8,7 @@
   },
 
   {
-    "FullName": "Иван Иванов",
+    "FullName": "Sally Vazovskiy",
     "Email": "jopka@gmail.com",
     "Password": "jopkaPopka",
     "Age": 28,
@@ -16,9 +16,9 @@
   },
 
   {
-    "FullName": "Иван Сидоров",
+    "FullName": "Ivan Vazovskiy",
     "Email": "govno@gmail.com",
-    "Password": "jopkaPiska",
+    "Password": "jopkaPopka",
     "Age": 34,
     "Roles": [ "Support", "User" ]
   }

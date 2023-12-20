@@ -69,10 +69,10 @@ namespace TestTask.DAL.Migrations
                 columns: new[] { "Id", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("10b2330b-89b1-4262-b9f3-9963d47e22e6"), "Support" },
-                    { new Guid("2771ba05-86d7-4fb3-9884-cf60755e56c9"), "User" },
-                    { new Guid("53bd3d14-5c0c-4c0c-b45f-365865b09804"), "Admin" },
-                    { new Guid("ade6e94e-73fb-4cee-9a93-ec008be89748"), "SuperAdmin" }
+                    { new Guid("157f1ade-c626-4bb6-a0f6-dfec9af03acd"), "Admin" },
+                    { new Guid("1e0940e1-6e7b-4786-9f73-0b1fce52f8ee"), "SuperAdmin" },
+                    { new Guid("9c6f35a3-6be9-4e0b-a3a0-6c7c50db6464"), "Support" },
+                    { new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922"), "User" }
                 });
 
             migrationBuilder.InsertData(
@@ -80,9 +80,9 @@ namespace TestTask.DAL.Migrations
                 columns: new[] { "Id", "Age", "Email", "FullName", "PasswordHash" },
                 values: new object[,]
                 {
-                    { new Guid("df27527b-7158-47e0-b55e-0d075f751170"), 25, "penis@gmail.com", "Mike Vazovskiy", "$2a$11$N.2UL/6z7EeOqU4H4CjewOV6pU6rLT9n4LQk0BkgkWmbZ79SM5LF." },
-                    { new Guid("e56cfd2f-6619-420d-8d9a-3bcd5f8ef4e1"), 34, "govno@gmail.com", "Иван Сидоров", "$2a$11$lxUKKVd01uxUvyeVLVQHXuK7Yj5kzH6cjhY5uh0aE.CuFiEpRQVIO" },
-                    { new Guid("e5e3008f-93bb-4d44-8f33-e37f2b5e69ac"), 28, "jopka@gmail.com", "Иван Иванов", "$2a$11$lWlWuU1qBurUrtyO2JeufusC.n0D1lQVyF9M5uZTBMB9cNO/tv.1a" }
+                    { new Guid("2324250c-1258-40bd-9cc2-429b749a9a2a"), 34, "govno@gmail.com", "Ivan Vazovskiy", "$2a$11$YYjEojDUW.dbGb9R/QSE4O6pmTsW7ZtzwYSy.7DGt0VfMHrFgLMWC" },
+                    { new Guid("c6f7040b-c383-49cd-9336-11118eaf384d"), 28, "jopka@gmail.com", "Sally Vazovskiy", "$2a$11$S.qmXp9l/sfcE3uF4XlWlO74uIbZuSVlColXBwD9peuAydSR40UYC" },
+                    { new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3"), 25, "penis@gmail.com", "Mike Vazovskiy", "$2a$11$8exyJAoj3b1oqKn4CBdd4upnwp5FCVDBTM/BpY9XickzyPXh8u61u" }
                 });
 
             migrationBuilder.InsertData(
@@ -90,13 +90,13 @@ namespace TestTask.DAL.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("14acbff4-2f9e-4d78-85f1-22fb875ec319"), new Guid("74156d72-d1e7-4b7c-a7d6-858e7893dc02") },
-                    { new Guid("f700d78f-dfd1-4593-9a34-cf098296b53c"), new Guid("74156d72-d1e7-4b7c-a7d6-858e7893dc02") },
-                    { new Guid("183e83b0-6027-4771-82c4-53a15de4bf66"), new Guid("cb101933-ddd2-41df-ad02-adacf58bebd5") },
-                    { new Guid("5abeb509-a426-4dad-90fa-bb51243943cd"), new Guid("cb101933-ddd2-41df-ad02-adacf58bebd5") },
-                    { new Guid("c4a51d31-7dd4-440a-846a-b45b63e4075f"), new Guid("cb101933-ddd2-41df-ad02-adacf58bebd5") },
-                    { new Guid("8df2a3d9-d479-4c5a-a8f2-e26f3a77a772"), new Guid("fe8482e1-4123-4c7e-97e2-50ad4192b80b") },
-                    { new Guid("cabafc03-fb8c-41b6-a23f-59378ef91cd9"), new Guid("fe8482e1-4123-4c7e-97e2-50ad4192b80b") }
+                    { new Guid("9c6f35a3-6be9-4e0b-a3a0-6c7c50db6464"), new Guid("2324250c-1258-40bd-9cc2-429b749a9a2a") },
+                    { new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922"), new Guid("2324250c-1258-40bd-9cc2-429b749a9a2a") },
+                    { new Guid("157f1ade-c626-4bb6-a0f6-dfec9af03acd"), new Guid("c6f7040b-c383-49cd-9336-11118eaf384d") },
+                    { new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922"), new Guid("c6f7040b-c383-49cd-9336-11118eaf384d") },
+                    { new Guid("157f1ade-c626-4bb6-a0f6-dfec9af03acd"), new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3") },
+                    { new Guid("1e0940e1-6e7b-4786-9f73-0b1fce52f8ee"), new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3") },
+                    { new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922"), new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3") }
                 });
 
             migrationBuilder.CreateIndex(

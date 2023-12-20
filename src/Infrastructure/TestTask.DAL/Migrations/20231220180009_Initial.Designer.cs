@@ -12,7 +12,7 @@ using TestTask.DAL;
 namespace TestTask.DAL.Migrations
 {
     [DbContext(typeof(TestTaskDbContext))]
-    [Migration("20231220171531_Initial")]
+    [Migration("20231220180009_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -44,22 +44,22 @@ namespace TestTask.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("53bd3d14-5c0c-4c0c-b45f-365865b09804"),
+                            Id = new Guid("157f1ade-c626-4bb6-a0f6-dfec9af03acd"),
                             Title = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("2771ba05-86d7-4fb3-9884-cf60755e56c9"),
+                            Id = new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922"),
                             Title = "User"
                         },
                         new
                         {
-                            Id = new Guid("ade6e94e-73fb-4cee-9a93-ec008be89748"),
+                            Id = new Guid("1e0940e1-6e7b-4786-9f73-0b1fce52f8ee"),
                             Title = "SuperAdmin"
                         },
                         new
                         {
-                            Id = new Guid("10b2330b-89b1-4262-b9f3-9963d47e22e6"),
+                            Id = new Guid("9c6f35a3-6be9-4e0b-a3a0-6c7c50db6464"),
                             Title = "Support"
                         });
                 });
@@ -94,27 +94,27 @@ namespace TestTask.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("df27527b-7158-47e0-b55e-0d075f751170"),
+                            Id = new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3"),
                             Age = 25,
                             Email = "penis@gmail.com",
                             FullName = "Mike Vazovskiy",
-                            PasswordHash = "$2a$11$N.2UL/6z7EeOqU4H4CjewOV6pU6rLT9n4LQk0BkgkWmbZ79SM5LF."
+                            PasswordHash = "$2a$11$8exyJAoj3b1oqKn4CBdd4upnwp5FCVDBTM/BpY9XickzyPXh8u61u"
                         },
                         new
                         {
-                            Id = new Guid("e5e3008f-93bb-4d44-8f33-e37f2b5e69ac"),
+                            Id = new Guid("c6f7040b-c383-49cd-9336-11118eaf384d"),
                             Age = 28,
                             Email = "jopka@gmail.com",
-                            FullName = "Иван Иванов",
-                            PasswordHash = "$2a$11$lWlWuU1qBurUrtyO2JeufusC.n0D1lQVyF9M5uZTBMB9cNO/tv.1a"
+                            FullName = "Sally Vazovskiy",
+                            PasswordHash = "$2a$11$S.qmXp9l/sfcE3uF4XlWlO74uIbZuSVlColXBwD9peuAydSR40UYC"
                         },
                         new
                         {
-                            Id = new Guid("e56cfd2f-6619-420d-8d9a-3bcd5f8ef4e1"),
+                            Id = new Guid("2324250c-1258-40bd-9cc2-429b749a9a2a"),
                             Age = 34,
                             Email = "govno@gmail.com",
-                            FullName = "Иван Сидоров",
-                            PasswordHash = "$2a$11$lxUKKVd01uxUvyeVLVQHXuK7Yj5kzH6cjhY5uh0aE.CuFiEpRQVIO"
+                            FullName = "Ivan Vazovskiy",
+                            PasswordHash = "$2a$11$YYjEojDUW.dbGb9R/QSE4O6pmTsW7ZtzwYSy.7DGt0VfMHrFgLMWC"
                         });
                 });
 
@@ -135,38 +135,38 @@ namespace TestTask.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("cb101933-ddd2-41df-ad02-adacf58bebd5"),
-                            RoleId = new Guid("5abeb509-a426-4dad-90fa-bb51243943cd")
+                            UserId = new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3"),
+                            RoleId = new Guid("157f1ade-c626-4bb6-a0f6-dfec9af03acd")
                         },
                         new
                         {
-                            UserId = new Guid("cb101933-ddd2-41df-ad02-adacf58bebd5"),
-                            RoleId = new Guid("c4a51d31-7dd4-440a-846a-b45b63e4075f")
+                            UserId = new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3"),
+                            RoleId = new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922")
                         },
                         new
                         {
-                            UserId = new Guid("cb101933-ddd2-41df-ad02-adacf58bebd5"),
-                            RoleId = new Guid("183e83b0-6027-4771-82c4-53a15de4bf66")
+                            UserId = new Guid("cd9b8a1d-0897-418f-8981-9ad728ee35c3"),
+                            RoleId = new Guid("1e0940e1-6e7b-4786-9f73-0b1fce52f8ee")
                         },
                         new
                         {
-                            UserId = new Guid("74156d72-d1e7-4b7c-a7d6-858e7893dc02"),
-                            RoleId = new Guid("f700d78f-dfd1-4593-9a34-cf098296b53c")
+                            UserId = new Guid("c6f7040b-c383-49cd-9336-11118eaf384d"),
+                            RoleId = new Guid("157f1ade-c626-4bb6-a0f6-dfec9af03acd")
                         },
                         new
                         {
-                            UserId = new Guid("74156d72-d1e7-4b7c-a7d6-858e7893dc02"),
-                            RoleId = new Guid("14acbff4-2f9e-4d78-85f1-22fb875ec319")
+                            UserId = new Guid("c6f7040b-c383-49cd-9336-11118eaf384d"),
+                            RoleId = new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922")
                         },
                         new
                         {
-                            UserId = new Guid("fe8482e1-4123-4c7e-97e2-50ad4192b80b"),
-                            RoleId = new Guid("8df2a3d9-d479-4c5a-a8f2-e26f3a77a772")
+                            UserId = new Guid("2324250c-1258-40bd-9cc2-429b749a9a2a"),
+                            RoleId = new Guid("be47cc53-f76f-4007-92cb-1ba3ea8f5922")
                         },
                         new
                         {
-                            UserId = new Guid("fe8482e1-4123-4c7e-97e2-50ad4192b80b"),
-                            RoleId = new Guid("cabafc03-fb8c-41b6-a23f-59378ef91cd9")
+                            UserId = new Guid("2324250c-1258-40bd-9cc2-429b749a9a2a"),
+                            RoleId = new Guid("9c6f35a3-6be9-4e0b-a3a0-6c7c50db6464")
                         });
                 });
 

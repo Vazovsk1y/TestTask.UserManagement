@@ -27,7 +27,7 @@ internal static class Extensions
 
 	public static void SeedData(this ModelBuilder modelBuilder)
 	{
-		var roles = new string[] { Roles.Admin, Roles.User, Roles.SuperAdmin, Roles.Support }.Select(e => new Role { Title = e });
+		var roles = new string[] { Roles.Admin, Roles.User, Roles.SuperAdmin, Roles.Support }.Select(e => new Role { Title = e }).ToList();
 
 		using var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(UsersSeedResourceName) 
 			?? throw new InvalidOperationException("Users seed resourse file not found.");
@@ -39,7 +39,7 @@ internal static class Extensions
 			Email = e.Email,
 			FullName = e.FullName,
 			PasswordHash = BCrypt.Net.BCrypt.HashPassword(e.Password),
-		});
+		}).ToList();
 
 
 		var usersRoles = new List<UserRole>();
