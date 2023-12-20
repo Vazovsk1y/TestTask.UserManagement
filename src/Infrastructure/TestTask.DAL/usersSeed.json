@@ -1,0 +1,25 @@
+﻿[
+  {
+    "FullName": "Mike Vazovskiy",
+    "Email": "penis@gmail.com",
+    "Password": "penisPopka",
+    "Age": 25,
+    "Roles": [ "SuperAdmin", "Admin", "User" ]
+  },
+
+  {
+    "FullName": "Иван Иванов",
+    "Email": "jopka@gmail.com",
+    "Password": "jopkaPopka",
+    "Age": 28,
+    "Roles": [ "Admin", "User" ]
+  },
+
+  {
+    "FullName": "Иван Сидоров",
+    "Email": "govno@gmail.com",
+    "Password": "jopkaPiska",
+    "Age": 34,
+    "Roles": [ "Support", "User" ]
+  }
+]

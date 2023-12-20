@@ -15,5 +15,6 @@ public class TestTaskDbContext(DbContextOptions<TestTaskDbContext> dbContextOpti
 	{
 		base.OnModelCreating(modelBuilder);
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(TestTaskDbContext).Assembly);
+		modelBuilder.SeedData();
 	}
 }
