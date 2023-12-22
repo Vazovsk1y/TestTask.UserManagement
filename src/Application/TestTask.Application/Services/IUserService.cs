@@ -5,7 +5,10 @@ namespace TestTask.Application.Services;
 
 public interface IUserService
 {
-	Task<Result<UsersPage>> GetAsync(PagingOptions? pagingOptions = null, CancellationToken cancellationToken = default);
+	Task<Result<UsersPage>> GetAsync(
+		UsersSortingOptions sortingOptions, 
+		PagingOptions? pagingOptions = null, 
+		CancellationToken cancellationToken = default);
 
 	Task<Result<UserDTO>> GetByIdAsync(UserId userId, CancellationToken cancellationToken = default);
 

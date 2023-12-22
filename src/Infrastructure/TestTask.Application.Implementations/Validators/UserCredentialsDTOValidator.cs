@@ -3,7 +3,7 @@ using TestTask.Application.Responses;
 
 namespace TestTask.Application.Implementations.Validators;
 
-internal class UserCredentialsDTOValidator : AbstractValidator<UserCredentialsDTO>
+public class UserCredentialsDTOValidator : AbstractValidator<UserCredentialsDTO>
 {
 	public UserCredentialsDTOValidator()
 	{

@@ -1,9 +1,10 @@
 ﻿
 namespace TestTask.Application.Responses;
 
-public record UsersPage : Page<UserDTO>
+public record UsersPage : Page<UserDTO, UsersSortingOptions>
 {
-	public UsersPage(IReadOnlyCollection<UserDTO> items, int totalItemsCount, PagingOptions? pagingOptions = null) : base(items, totalItemsCount, pagingOptions)
+	public UsersPage(IReadOnlyCollection<UserDTO> items, int totalItemsCount, UsersSortingOptions sortingOptions, PagingOptions? pagingOptions = null) 
+		: base(items, totalItemsCount, sortingOptions, pagingOptions)
 	{
 	}
 }

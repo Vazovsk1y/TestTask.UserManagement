@@ -8,7 +8,7 @@ namespace TestTask.Application.Implementations;
 
 public static class Registrator
 {
-	public static IServiceCollection AddApplication(this IServiceCollection services) => services
+	public static IServiceCollection AddApplicationLayer(this IServiceCollection services) => services
 		.AddScoped<IUserService, UserService>()
 		.AddValidatorsFromAssembly(typeof(UserAddRoleDTOValidator).Assembly)
 		;
