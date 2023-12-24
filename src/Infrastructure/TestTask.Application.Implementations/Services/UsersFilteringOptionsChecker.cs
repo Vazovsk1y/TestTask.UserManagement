@@ -4,7 +4,7 @@ using TestTask.Application.Services;
 
 namespace TestTask.Application.Implementations.Services;
 
-public class UsersRootFilterChecker : IFilteringOptionsChecker<UsersFilteringOptions>
+public class UsersFilteringOptionsChecker : IFilteringOptionsChecker<UsersFilteringOptions>
 {
 	public Result IsAppliсable(UsersFilteringOptions filter)
 	{

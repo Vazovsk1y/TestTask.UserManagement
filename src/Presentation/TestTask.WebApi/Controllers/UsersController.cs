@@ -2,6 +2,7 @@
 using TestTask.Application.Contracts;
 using TestTask.Application.Contracts.Common;
 using TestTask.Application.Services;
+using TestTask.Domain.Entities;
 using TestTask.WebApi.Controllers.Base;
 using TestTask.WebApi.ViewModels;
 
@@ -36,6 +37,13 @@ public class UsersController(IUserService userService) : BaseController
 
 		var result = await _userService.GetAsync(sortingOptions, pagingOptions, filteringOptions);
 
+		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorMessage);
+	}
+
+	[HttpGet("{id}")]
+	public async Task<IActionResult> GetUserById(Guid id)
+	{
+		var result = await _userService.GetByIdAsync(new UserId(id));
 		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorMessage);
 	}
 }

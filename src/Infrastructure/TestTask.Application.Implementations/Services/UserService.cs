@@ -72,9 +72,15 @@ internal class UserService(
 			filteringOptions);
 	}
 
-	public Task<Result<UserDTO>> GetByIdAsync(UserId userId, CancellationToken cancellationToken = default)
+	public async Task<Result<UserDTO>> GetByIdAsync(UserId userId, CancellationToken cancellationToken = default)
 	{
-		throw new NotImplementedException();
+		var user = await _dbContext.Users.SingleOrDefaultAsync(e => e.Id == userId, cancellationToken);
+		if (user is null)
+		{
+			return Result.Failure<UserDTO>(Errors.EntityWithPassedIdIsNotExists(nameof(User)));
+		}
+
+		return user.ToDTO();
 	}
 
 	public Task<Result> RegisterAsync(UserRegisterDTO userRegisterDTO, CancellationToken cancellationToken = default)

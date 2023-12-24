@@ -11,7 +11,7 @@ public static class Registrator
 {
 	public static IServiceCollection AddApplicationLayer(this IServiceCollection services) => services
 		.AddScoped<IUserService, UserService>()
-		.AddTransient<IFilteringOptionsChecker<UsersFilteringOptions>, UsersRootFilterChecker>()
+		.AddTransient<IFilteringOptionsChecker<UsersFilteringOptions>, UsersFilteringOptionsChecker>()
 		.AddScoped<IRoleService, RoleService>()
 		.AddValidatorsFromAssembly(typeof(UserSetRoleDTOValidator).Assembly)
 		.AddScoped(typeof(IValidator<>), typeof(ValueIdValidator<>))
