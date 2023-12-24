@@ -7,5 +7,5 @@ public interface IRoleService
 {
 	Task<Result> SetRoleAsync(UserSetRoleDTO userSetRoleDTO, CancellationToken cancellationToken = default);
 
-	Task<Result<IReadOnlyCollection<RoleDTO>>> GetAllAsync(CancellationToken cancellationToken = default);
+	Task<Result<RolesPage>> GetAsync(PagingOptions? pagingOptions = null, CancellationToken cancellationToken = default);
 }
