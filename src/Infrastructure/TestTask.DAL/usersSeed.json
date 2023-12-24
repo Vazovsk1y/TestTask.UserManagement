@@ -6,7 +6,20 @@
     "Age": 25,
     "Roles": [ "SuperAdmin", "Admin", "User" ]
   },
-
+  {
+    "FullName": "Mike Popchinskiy",
+    "Email": "penis.vonyaet@gmail.com",
+    "Password": "bigDick",
+    "Age": 16,
+    "Roles": [ "SuperAdmin", "Admin", "User" ]
+  },
+  {
+    "FullName": "Mike Kurwa",
+    "Email": "kurwa.vonyaet@gmail.com",
+    "Password": "bober",
+    "Age": 19,
+    "Roles": [ "SuperAdmin", "Admin", "User" ]
+  },
   {
     "FullName": "Sally Vazovskiy",
     "Email": "jopka@gmail.com",
@@ -14,12 +27,186 @@
     "Age": 28,
     "Roles": [ "Admin", "User" ]
   },
-
   {
     "FullName": "Ivan Vazovskiy",
     "Email": "govno@gmail.com",
     "Password": "jopkaPopka",
     "Age": 34,
     "Roles": [ "Support", "User" ]
+  },
+  {
+    "FullName": "John Doe",
+    "Email": "john.doe@example.com",
+    "Password": "securePassword123",
+    "Age": 30,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "John Doe Jr.",
+    "Email": "john.doe.jr@example.com",
+    "Password": "juniorPassword456",
+    "Age": 28,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "John Doe Sr.",
+    "Email": "john.doe.sr@example.com",
+    "Password": "seniorPassword789",
+    "Age": 55,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Alice Johnson",
+    "Email": "alice.johnson@example.com",
+    "Password": "password123",
+    "Age": 22,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Alice Johnson II",
+    "Email": "alice.johnson.ii@example.com",
+    "Password": "secondPasswordABC",
+    "Age": 25,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Alice Johnson III",
+    "Email": "alice.johnson.iii@example.com",
+    "Password": "thirdPasswordXYZ",
+    "Age": 32,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Bob Smith",
+    "Email": "bob.smith@example.com",
+    "Password": "strongPassword",
+    "Age": 45,
+    "Roles": [ "Admin", "User" ]
+  },
+  {
+    "FullName": "Bob Smith Jr.",
+    "Email": "bob.smith.jr@example.com",
+    "Password": "juniorStrongPassword",
+    "Age": 30,
+    "Roles": [ "Admin", "User" ]
+  },
+  {
+    "FullName": "Bob Smith III",
+    "Email": "bob.smith.iii@example.com",
+    "Password": "thirdStrongPassword",
+    "Age": 35,
+    "Roles": [ "Admin", "User" ]
+  },
+  {
+    "FullName": "Emily White",
+    "Email": "emily.white@example.com",
+    "Password": "qwerty123",
+    "Age": 28,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Emily White II",
+    "Email": "emily.white.ii@example.com",
+    "Password": "secondPasswordXYZ",
+    "Age": 32,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Emily White III",
+    "Email": "emily.white.iii@example.com",
+    "Password": "thirdPasswordABC",
+    "Age": 27,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Daniel Brown",
+    "Email": "daniel.brown@example.com",
+    "Password": "brownie",
+    "Age": 35,
+    "Roles": [ "Support", "User" ]
+  },
+  {
+    "FullName": "Daniel Brown Jr.",
+    "Email": "daniel.brown.jr@example.com",
+    "Password": "juniorBrownie",
+    "Age": 29,
+    "Roles": [ "Support", "User" ]
+  },
+  {
+    "FullName": "Daniel Brown III",
+    "Email": "daniel.brown.iii@example.com",
+    "Password": "thirdBrownie",
+    "Age": 33,
+    "Roles": [ "Support", "User" ]
+  },
+  {
+    "FullName": "Sophia Black",
+    "Email": "sophia.black@example.com",
+    "Password": "blackCat",
+    "Age": 26,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Jack Miller",
+    "Email": "jack.miller@example.com",
+    "Password": "millerLite",
+    "Age": 31,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Emma Green",
+    "Email": "emma.green@example.com",
+    "Password": "greenTea",
+    "Age": 29,
+    "Roles": [ "Admin", "User" ]
+  },
+  {
+    "FullName": "Michael Grey",
+    "Email": "michael.grey@example.com",
+    "Password": "greyhound",
+    "Age": 40,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Olivia Red",
+    "Email": "olivia.red@example.com",
+    "Password": "redRose",
+    "Age": 24,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "William Yellow",
+    "Email": "william.yellow@example.com",
+    "Password": "yellowSubmarine",
+    "Age": 33,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Ava Purple",
+    "Email": "ava.purple@example.com",
+    "Password": "purpleHaze",
+    "Age": 27,
+    "Roles": [ "Admin", "User" ]
+  },
+  {
+    "FullName": "James Orange",
+    "Email": "james.orange@example.com",
+    "Password": "orangeJuice",
+    "Age": 14,
+    "Roles": [ "User" ]
+  },
+  {
+    "FullName": "Mia Pink",
+    "Email": "mia.pink@example.com",
+    "Password": "pinkPanther",
+    "Age": 25,
+    "Roles": [ "Support", "User" ]
+  },
+  {
+    "FullName": "Ethan Silver",
+    "Email": "ethan.silver@example.com",
+    "Password": "silverSurfer",
+    "Age": 18,
+    "Roles": [ "User" ]
   }
 ]

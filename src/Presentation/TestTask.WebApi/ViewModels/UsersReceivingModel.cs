@@ -1,3 +1,6 @@
 ﻿namespace TestTask.WebApi.ViewModels;
 
-public record UsersReceivingModel(UsersSortingModel SortingModel, PagingOptionsModel? PagingOptionsModel = null);
+public record UsersReceivingModel(
+	UsersSortingOptionsModel SortingOptions, 
+	PagingOptionsModel? PagingOptions = null, 
+	UsersFilteringOptionsModel? FilteringOptions = null);

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TestTask.Application.Responses;
+using TestTask.Application.Contracts.Common;
 
 namespace TestTask.Application.Implementations.Validators;
 
