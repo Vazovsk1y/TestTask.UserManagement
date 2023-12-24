@@ -46,4 +46,12 @@ public class UsersController(IUserService userService) : BaseController
 		var result = await _userService.GetByIdAsync(new UserId(id));
 		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorMessage);
 	}
+
+	[HttpPost("sign-up")]
+	public async Task<IActionResult> Register(UserRegisterModel registerModel)
+	{
+		var dto = new UserRegisterDTO(registerModel.FullName, registerModel.Age, new UserCredentialsDTO(registerModel.Email, registerModel.Password));
+		var result = await _userService.RegisterAsync(dto);
+		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorMessage);
+	}
 }
