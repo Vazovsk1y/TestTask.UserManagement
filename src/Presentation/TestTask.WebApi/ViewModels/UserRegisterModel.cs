@@ -1,3 +1,3 @@
 ﻿namespace TestTask.WebApi.ViewModels;
 
-public record UserRegisterModel(string FullName, int Age, string Email, string Password);
+public record UserRegisterModel(string FullName, int Age, UserCredentialsModel Credentials);

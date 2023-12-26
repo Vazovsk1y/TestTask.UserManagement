@@ -13,6 +13,7 @@ public static class Registrator
 		.AddScoped<IUserService, UserService>()
 		.AddTransient<IFilteringOptionsChecker<UsersFilteringOptions>, UsersFilteringOptionsChecker>()
 		.AddScoped<IRoleService, RoleService>()
+		.AddScoped<IAuthenticationService, AuthenticationService>()
 		.AddValidatorsFromAssembly(typeof(UserSetRoleDTOValidator).Assembly)
 		.AddScoped(typeof(IValidator<>), typeof(ValueIdValidator<>))
 		;

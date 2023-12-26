@@ -8,4 +8,9 @@ internal static class Errors
 	{
 		public const string EmailIsAlreadyTaken = "Email is already taken.";
 	}
+
+	internal static class Auth
+	{
+		public const string InvalidCredentials = "Incorrect password or email passed.";
+	}
 }

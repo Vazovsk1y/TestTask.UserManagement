@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TestTask.Application.Contracts;
 using TestTask.Application.Contracts.Common;
 using TestTask.Application.Services;
@@ -8,9 +9,12 @@ using TestTask.WebApi.ViewModels;
 
 namespace TestTask.WebApi.Controllers;
 
-public class UsersController(IUserService userService) : BaseController
+public class UsersController(
+	IUserService userService,
+	IAuthenticationService authenticationService) : BaseController
 {
 	private readonly IUserService _userService = userService;
+	private readonly IAuthenticationService _authenticationService = authenticationService;
 
 	[HttpPost]
 	public async Task<IActionResult> GetUsers(UsersReceivingModel usersReceivingModel)
@@ -48,10 +52,20 @@ public class UsersController(IUserService userService) : BaseController
 	}
 
 	[HttpPost("sign-up")]
+	[AllowAnonymous]
 	public async Task<IActionResult> Register(UserRegisterModel registerModel)
 	{
-		var dto = new UserRegisterDTO(registerModel.FullName, registerModel.Age, new UserCredentialsDTO(registerModel.Email, registerModel.Password));
+		var dto = new UserRegisterDTO(registerModel.FullName, registerModel.Age, new UserCredentialsDTO(registerModel.Credentials.Email, registerModel.Credentials.Password));
 		var result = await _userService.RegisterAsync(dto);
 		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorMessage);
+	}
+
+	[HttpPost("sign-in")]
+	[AllowAnonymous]
+	public async Task<IActionResult> Login(UserCredentialsModel credentialsModel)
+	{
+		var dto = new UserCredentialsDTO(credentialsModel.Email, credentialsModel.Password);
+		var result = await _authenticationService.LoginAsync(dto);
+		return result.IsSuccess ? Ok(result.Value.Value) : BadRequest(result.ErrorMessage); 
 	}
 }

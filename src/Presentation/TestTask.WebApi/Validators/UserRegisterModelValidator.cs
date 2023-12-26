@@ -5,11 +5,10 @@ namespace TestTask.WebApi.Validators;
 
 public class UserRegisterModelValidator : AbstractValidator<UserRegisterModel>
 {
-	public UserRegisterModelValidator() 
+	public UserRegisterModelValidator(IValidator<UserCredentialsModel> validator) 
 	{
 		RuleFor(e => e.Age).GreaterThanOrEqualTo(0);
 		RuleFor(e => e.FullName).NotEmpty();
-		RuleFor(e => e.Email).NotEmpty().EmailAddress();
-		RuleFor(e => e.Password).NotEmpty();
+		RuleFor(e => e.Credentials).SetValidator(validator);
 	}
 }
