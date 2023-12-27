@@ -12,5 +12,7 @@ internal static class Errors
 	internal static class Auth
 	{
 		public const string InvalidCredentials = "Incorrect password or email passed.";
+
+		public const string AccessDenided = "You have not enough rights to perform this action.";
 	}
 }

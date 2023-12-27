@@ -26,37 +26,48 @@ internal class UserService(
 	private readonly IValidator<UserRegisterDTO> _registerDtoValidator = registerDtoValidator;
 
 	public async Task<Result<UsersPage>> GetAsync(
+		UserId requesterId,
 		UsersSortingOptions sortingOptions,
 		PagingOptions? pagingOptions = null,
 		UsersFilteringOptions? filteringOptions = null,
 		CancellationToken cancellationToken = default)
 	{
-		if (pagingOptions is not null)
+		var user = await _dbContext
+			.Users
+			.Include(e => e.Roles)
+			.ThenInclude(e => e.Role)
+			.SingleOrDefaultAsync(e => e.Id == requesterId, cancellationToken);
+
+		if (user is null)
 		{
-			var validationResult = _pagingOptionsValidator.Validate(pagingOptions);
-			if (!validationResult.IsValid)
-			{
-				return Result.Failure<UsersPage>(validationResult.ToString());
-			}
+			return Result.Failure<UsersPage>(Errors.EntityWithPassedIdIsNotExists(nameof(User)));
 		}
 
-		if (filteringOptions is not null)
+		var isActionPermitted = user.IsInRole(Roles.SuperAdmin) || user.IsInRole(Roles.Admin) || user.IsInRole(Roles.Support);
+		if (!isActionPermitted)
 		{
-			var validationResult = _filteringOptionsValidator.Validate(filteringOptions);
-			if (!validationResult.IsValid)
-			{
-				return Result.Failure<UsersPage>(validationResult.ToString());
-			}
+			return Result.Failure<UsersPage>(Errors.Auth.AccessDenided);
+		}
 
-			var applicabilityResult = _filteringOptionsChecker.IsAppliсable(filteringOptions);
-			if (applicabilityResult.IsFailure)
-			{
-				return Result.Failure<UsersPage>(applicabilityResult.ErrorMessage);
-			}
+		var pagingOptionsValidationResult = pagingOptions is null ? null : _pagingOptionsValidator.Validate(pagingOptions);
+		if (pagingOptionsValidationResult is { IsValid: false })
+		{
+			return Result.Failure<UsersPage>(pagingOptionsValidationResult.ToString());
+		}
+
+		var filteringOptionsValidationResult = filteringOptions is null ? null : _filteringOptionsValidator.Validate(filteringOptions);
+		if (filteringOptionsValidationResult is { IsValid: false })
+		{
+			return Result.Failure<UsersPage>(filteringOptionsValidationResult.ToString());
+		}
+
+		var applicabilityResult = filteringOptions is null ? null : _filteringOptionsChecker.IsAppliсable(filteringOptions);
+		if (applicabilityResult is { IsFailure: true })
+		{
+			return Result.Failure<UsersPage>(applicabilityResult.ErrorMessage);
 		}
 
 		int totalUsersCount = _dbContext.Users.ApplyFiltering(filteringOptions).Count();
-
 		var users = await _dbContext
 			.Users
 			.Include(e => e.Roles)

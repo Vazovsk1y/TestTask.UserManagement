@@ -33,4 +33,9 @@ public static class Common
     {
         return await users.AnyAsync(e => e.Email == email);
 	}
+
+    internal static bool IsInRole(this User user, string roleTitle)
+    {
+        return user.Roles.Any(e => e.Role!.Title == roleTitle);
+    }
 }

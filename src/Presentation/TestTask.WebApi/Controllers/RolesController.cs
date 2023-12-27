@@ -2,6 +2,7 @@
 using TestTask.Application.Contracts.Common;
 using TestTask.Application.Services;
 using TestTask.WebApi.Controllers.Base;
+using TestTask.WebApi.Validators;
 using TestTask.WebApi.ViewModels;
 
 namespace TestTask.WebApi.Controllers;

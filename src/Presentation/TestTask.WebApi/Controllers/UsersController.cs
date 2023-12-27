@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using TestTask.Application.Contracts;
 using TestTask.Application.Contracts.Common;
 using TestTask.Application.Services;
+using TestTask.Domain.Constants;
 using TestTask.Domain.Entities;
 using TestTask.WebApi.Controllers.Base;
+using TestTask.WebApi.Validators;
 using TestTask.WebApi.ViewModels;
 
 namespace TestTask.WebApi.Controllers;
@@ -17,6 +19,7 @@ public class UsersController(
 	private readonly IAuthenticationService _authenticationService = authenticationService;
 
 	[HttpPost]
+	[PermittedTo(Roles.SuperAdmin, Roles.Admin, Roles.Support)]
 	public async Task<IActionResult> GetUsers(UsersReceivingModel usersReceivingModel)
 	{
 		var sortingOptions = new UsersSortingOptions
@@ -39,7 +42,7 @@ public class UsersController(
 				Enum.Parse<Logic>(usersReceivingModel.FilteringOptions.Logic, true)
 			);
 
-		var result = await _userService.GetAsync(sortingOptions, pagingOptions, filteringOptions);
+		var result = await _userService.GetAsync(HttpContext.GetUserId(), sortingOptions, pagingOptions, filteringOptions);
 
 		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorMessage);
 	}
