@@ -87,19 +87,42 @@ internal class UserService(
 			filteringOptions);
 	}
 
-	public async Task<Result<UserDTO>> GetByIdAsync(UserId userId, CancellationToken cancellationToken = default)
+	public async Task<Result<UserDTO>> GetByIdAsync(UserId requesterId, UserId searchId, CancellationToken cancellationToken = default)
 	{
-		var user = await _dbContext.Users
+		var requester = await _dbContext
+			.Users
 			.Include(e => e.Roles)
 			.ThenInclude(e => e.Role)
-			.SingleOrDefaultAsync(e => e.Id == userId, cancellationToken);
+			.SingleOrDefaultAsync(e => e.Id == requesterId, cancellationToken);
 
-		if (user is null)
+		if (requester is null)
+		{
+			return Result.Failure<UserDTO>("Requester not found.");
+		}
+
+		if (requester.Id == searchId)
+		{
+			return requester.ToDTO();
+		}
+
+		var actionPermitted = requester.IsInRole(Roles.Support) || requester.IsInRole(Roles.Admin) || requester.IsInRole(Roles.SuperAdmin);
+		if (!actionPermitted)
+		{
+			return Result.Failure<UserDTO>(Errors.Auth.AccessDenided);
+		}
+
+		var searchUser = await _dbContext
+			.Users
+			.Include(e => e.Roles)
+			.ThenInclude(e => e.Role)
+			.SingleOrDefaultAsync(e => e.Id == searchId, cancellationToken);
+
+		if (searchUser is null)
 		{
 			return Result.Failure<UserDTO>(Errors.EntityWithPassedIdIsNotExists(nameof(User)));
 		}
 
-		return user.ToDTO();
+		return searchUser.ToDTO();
 	}
 
 	public async Task<Result<UserId>> RegisterAsync(UserRegisterDTO userRegisterDTO, CancellationToken cancellationToken = default)

@@ -13,7 +13,10 @@ public interface IUserService
 		UsersFilteringOptions? filteringOptions = null,
 		CancellationToken cancellationToken = default);
 
-	Task<Result<UserDTO>> GetByIdAsync(UserId searchUserId, CancellationToken cancellationToken = default);
+	Task<Result<UserDTO>> GetByIdAsync(
+		UserId requesterId,
+		UserId searchId, 
+		CancellationToken cancellationToken = default);
 
 	Task<Result<UserId>> RegisterAsync(UserRegisterDTO userRegisterDTO, CancellationToken cancellationToken = default);
 

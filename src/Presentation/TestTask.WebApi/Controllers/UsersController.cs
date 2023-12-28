@@ -50,7 +50,7 @@ public class UsersController(
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetUserById(Guid id)
 	{
-		var result = await _userService.GetByIdAsync(new UserId(id));
+		var result = await _userService.GetByIdAsync(HttpContext.GetUserId(), new UserId(id));
 		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorMessage);
 	}
 
