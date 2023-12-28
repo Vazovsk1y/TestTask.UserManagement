@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using TestTask.Application.Contracts.Common;
-using TestTask.Domain.Constants;
 using TestTask.Domain.Entities;
 
 namespace TestTask.Application.Implementations.Extensions;
@@ -37,5 +36,10 @@ public static class Common
     internal static bool IsInRole(this User user, string roleTitle)
     {
         return user.Roles.Any(e => e.Role!.Title == roleTitle);
+    }
+
+    internal static bool IsInRole(this User user, RoleId roleId)
+    {
+        return user.Roles.Any(e => e.RoleId == roleId);
     }
 }

@@ -2,4 +2,4 @@
 
 namespace TestTask.Application.Contracts;
 
-public record UserSetRoleDTO(UserId FromId, UserId ToId, RoleId RoleId);
+public record UserAddToRoleDTO(UserId ToId, RoleId RoleId);

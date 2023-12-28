@@ -6,13 +6,16 @@ using TestTask.Application.Implementations.Extensions;
 using TestTask.Application.Implementations.Extensions.Extensions;
 using TestTask.Application.Services;
 using TestTask.DAL;
+using TestTask.Domain.Constants;
+using TestTask.Domain.Entities;
 
 namespace TestTask.Application.Implementations.Services;
 
-internal class RoleService(TestTaskDbContext dbContext, IValidator<PagingOptions> pagingOptionsValidator) : IRoleService
+internal class RoleService(TestTaskDbContext dbContext, IValidator<PagingOptions> pagingOptionsValidator, IValidator<UserAddToRoleDTO> addToRoleValidator) : IRoleService
 {
 	private readonly TestTaskDbContext _dbContext = dbContext;
 	private readonly IValidator<PagingOptions> _pagingOptionsValidator = pagingOptionsValidator;
+	private readonly IValidator<UserAddToRoleDTO> _addToRoleValidator = addToRoleValidator;
 
 	public async Task<Result<RolesPage>> GetAsync(PagingOptions? pagingOptions = null, CancellationToken cancellationToken = default)
 	{
@@ -36,8 +39,65 @@ internal class RoleService(TestTaskDbContext dbContext, IValidator<PagingOptions
 		return new RolesPage(roles, totalCount, pagingOptions);
 	}
 
-	public Task<Result> SetRoleAsync(UserSetRoleDTO userSetRoleDTO, CancellationToken cancellationToken = default)
+	public async Task<Result> AddToRoleAsync(UserId requesterId, UserAddToRoleDTO userAddToRoleDTO, CancellationToken cancellationToken = default)
 	{
-		throw new NotImplementedException();
+		var validationResult = _addToRoleValidator.Validate(userAddToRoleDTO);
+		if (!validationResult.IsValid)
+		{
+			return Result.Failure(validationResult.ToString());
+		}
+
+		if (requesterId == userAddToRoleDTO.ToId)
+		{
+			return Result.Failure("You can't add new role to yourself.");
+		}
+
+		var requester = await _dbContext
+			.Users
+			.Include(e => e.Roles)
+			.ThenInclude(e => e.Role)
+			.SingleOrDefaultAsync(e => e.Id == requesterId, cancellationToken);
+
+		if (requester is null)
+		{
+			return Result.Failure("Requester not found.");
+		}
+
+		var role = await _dbContext.Roles.SingleOrDefaultAsync(e => e.Id == userAddToRoleDTO.RoleId, cancellationToken);
+		if (role is null)
+		{
+			return Result.Failure(Errors.EntityWithPassedIdIsNotExists(nameof(Role)));
+		}
+
+		var user = await _dbContext
+			.Users
+			.Include(e => e.Roles)
+			.ThenInclude(e => e.Role)
+			.SingleOrDefaultAsync(e => e.Id == userAddToRoleDTO.ToId, cancellationToken);
+
+		if (user is null)
+		{
+			return Result.Failure(Errors.EntityWithPassedIdIsNotExists(nameof(User)));
+		}
+
+		if (user.IsInRole(role.Id))
+		{
+			return Result.Failure("User is already in role.");
+		}
+
+		var actionPermitted = requester.IsInRole(Roles.SuperAdmin);
+		if (!actionPermitted)
+		{
+			return Result.Failure(Errors.Auth.AccessDenided);
+		}
+
+		user.Roles.Add(new UserRole
+		{
+			RoleId = role.Id,
+			UserId = user.Id,
+		});
+
+		await _dbContext.SaveChangesAsync(cancellationToken);
+		return Result.Success();
 	}
 }

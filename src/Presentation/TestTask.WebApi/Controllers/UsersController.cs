@@ -13,10 +13,12 @@ namespace TestTask.WebApi.Controllers;
 
 public class UsersController(
 	IUserService userService,
-	IAuthenticationService authenticationService) : BaseController
+	IAuthenticationService authenticationService,
+	IRoleService roleService) : BaseController
 {
 	private readonly IUserService _userService = userService;
 	private readonly IAuthenticationService _authenticationService = authenticationService;
+	private readonly IRoleService _roleService = roleService;
 
 	[HttpPost]
 	[PermittedTo(Roles.SuperAdmin, Roles.Admin, Roles.Support)]
@@ -69,7 +71,7 @@ public class UsersController(
 	{
 		var dto = new UserCredentialsDTO(credentialsModel.Email, credentialsModel.Password);
 		var result = await _authenticationService.LoginAsync(dto);
-		return result.IsSuccess ? Ok(result.Value.Value) : BadRequest(result.ErrorMessage); 
+		return result.IsSuccess ? Ok(result.Value.Value) : BadRequest(result.ErrorMessage);
 	}
 
 	[HttpPut]
@@ -77,6 +79,15 @@ public class UsersController(
 	{
 		var dto = new UserUpdateDTO(new UserId(updateModel.UserId), updateModel.FullName, updateModel.Age);
 		var result = await _userService.UpdateAsync(HttpContext.GetUserId(), dto);
+		return result.IsSuccess ? Ok() : BadRequest(result.ErrorMessage);
+	}
+
+	[HttpPost("add-to-role")]
+	[PermittedTo(Roles.SuperAdmin)]
+	public async Task<IActionResult> AddUserToRole(UserAddToRoleModel userAddToRole)
+	{
+		var dto = new UserAddToRoleDTO(new UserId(userAddToRole.UserId), new RoleId(userAddToRole.RoleId));
+		var result = await _roleService.AddToRoleAsync(HttpContext.GetUserId(), dto);
 		return result.IsSuccess ? Ok() : BadRequest(result.ErrorMessage);
 	}
 }
