@@ -71,4 +71,12 @@ public class UsersController(
 		var result = await _authenticationService.LoginAsync(dto);
 		return result.IsSuccess ? Ok(result.Value.Value) : BadRequest(result.ErrorMessage); 
 	}
+
+	[HttpPut]
+	public async Task<IActionResult> UpdateUser(UserUpdateModel updateModel)
+	{
+		var dto = new UserUpdateDTO(new UserId(updateModel.UserId), updateModel.FullName, updateModel.Age);
+		var result = await _userService.UpdateAsync(HttpContext.GetUserId(), dto);
+		return result.IsSuccess ? Ok() : BadRequest(result.ErrorMessage);
+	}
 }

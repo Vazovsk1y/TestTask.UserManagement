@@ -20,5 +20,5 @@ public interface IUserService
 
 	Task<Result<UserId>> RegisterAsync(UserRegisterDTO userRegisterDTO, CancellationToken cancellationToken = default);
 
-	Task<Result> UpdateAsync(UserUpdateDTO userUpdateDTO, CancellationToken cancellationToken = default);
+	Task<Result> UpdateAsync(UserId requesterId, UserUpdateDTO userUpdateDTO, CancellationToken cancellationToken = default);
 }

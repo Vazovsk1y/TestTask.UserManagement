@@ -1,5 +1,4 @@
-﻿using Azure;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using TestTask.Application.Contracts;
 using TestTask.Application.Contracts.Common;
@@ -17,13 +16,15 @@ internal class UserService(
 	IValidator<PagingOptions> pagingOptionsValidator,
 	IValidator<UsersFilteringOptions> filteringOptionsValidator,
 	IFilteringOptionsChecker<UsersFilteringOptions> filteringOptionsChecker,
-	IValidator<UserRegisterDTO> registerDtoValidator) : IUserService
+	IValidator<UserRegisterDTO> registerDtoValidator,
+	IValidator<UserUpdateDTO> updateDtoValidator) : IUserService
 {
 	private readonly TestTaskDbContext _dbContext = dbContext;
 	private readonly IValidator<PagingOptions> _pagingOptionsValidator = pagingOptionsValidator;
 	private readonly IValidator<UsersFilteringOptions> _filteringOptionsValidator = filteringOptionsValidator;
 	private readonly IFilteringOptionsChecker<UsersFilteringOptions> _filteringOptionsChecker = filteringOptionsChecker;
 	private readonly IValidator<UserRegisterDTO> _registerDtoValidator = registerDtoValidator;
+	private readonly IValidator<UserUpdateDTO> _updateDtoValidator = updateDtoValidator;
 
 	public async Task<Result<UsersPage>> GetAsync(
 		UserId requesterId,
@@ -155,8 +156,53 @@ internal class UserService(
 		return user.Id;
 	}
 
-	public Task<Result> UpdateAsync(UserUpdateDTO userUpdateDTO, CancellationToken cancellationToken = default)
+	public async Task<Result> UpdateAsync(UserId requesterId, UserUpdateDTO userUpdateDTO, CancellationToken cancellationToken = default)
 	{
-		throw new NotImplementedException();
+		var validationResult = _updateDtoValidator.Validate(userUpdateDTO);
+		if (!validationResult.IsValid)
+		{
+			return Result.Failure(validationResult.ToString());
+		}
+
+		var requester = await _dbContext
+			.Users
+			.Include(e => e.Roles)
+			.ThenInclude(e => e.Role)
+			.SingleOrDefaultAsync(e => e.Id == requesterId, cancellationToken);
+
+		if (requester is null)
+		{
+			return Result.Failure<UserDTO>("Requester not found.");
+		}
+
+		var actionPermitted = requester.IsInRole(Roles.Admin) || requester.IsInRole(Roles.SuperAdmin) || requester.Id == userUpdateDTO.Id;
+		if (!actionPermitted)
+		{
+			return Result.Failure(Errors.Auth.AccessDenided);
+		}
+
+		if (requester.Id == userUpdateDTO.Id)
+		{
+			requester.Age = userUpdateDTO.Age;
+			requester.FullName = userUpdateDTO.FullName;
+			await _dbContext.SaveChangesAsync(cancellationToken);
+			return Result.Success();
+		}
+
+		var user = await _dbContext
+		.Users
+		.Include(e => e.Roles)
+		.ThenInclude(e => e.Role)
+		.SingleOrDefaultAsync(e => e.Id == userUpdateDTO.Id, cancellationToken);
+
+		if (user is null)
+		{
+			return Result.Failure(Errors.EntityWithPassedIdIsNotExists(nameof(User)));
+		}
+
+		user.Age = userUpdateDTO.Age;
+		user.FullName = userUpdateDTO.FullName;
+		await _dbContext.SaveChangesAsync(cancellationToken);
+		return Result.Success();
 	}
 }
