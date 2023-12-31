@@ -32,6 +32,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MigrateDatabase();
+if (app.Environment.IsDevelopment())
+{
+	app.MigrateDatabase();
+}
 
 app.Run();
