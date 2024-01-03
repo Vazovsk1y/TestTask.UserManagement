@@ -16,11 +16,15 @@ builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtSectionName));
 builder.Services.AddAuthenticationWithJwtBearer(builder.Configuration.GetSection(JwtSectionName).Get<JwtOptions>()!);
 builder.Services.AddSwaggerWithJwt();
+builder.Services.AddExceptionHandler<ExceptionsHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 app.UseSwagger();
 app.UseSwaggerUI();
