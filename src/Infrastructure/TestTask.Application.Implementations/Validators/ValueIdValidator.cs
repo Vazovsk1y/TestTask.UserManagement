@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using TestTask.Domain.Common;
 
 namespace TestTask.Application.Implementations.Validators;
 

@@ -1,4 +1,6 @@
-﻿public interface IValueId<T> where T : IValueId<T>
+﻿namespace TestTask.Domain.Common;
+
+public interface IValueId<out T> where T : IValueId<T>
 {
 	Guid Value { get; }
 
