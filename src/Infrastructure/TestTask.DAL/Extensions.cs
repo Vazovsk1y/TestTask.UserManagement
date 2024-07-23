@@ -27,12 +27,12 @@ internal static class Extensions
 
 	public static void SeedData(this ModelBuilder modelBuilder)
 	{
-		var roles = new string[] { Roles.Admin, Roles.User, Roles.SuperAdmin, Roles.Support }.Select(e => new Role { Title = e }).ToList();
+		var roles = new[] { Roles.Admin, Roles.User, Roles.SuperAdmin, Roles.Support }.Select(e => new Role { Title = e }).ToList();
 
 		using var resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(UsersSeedResourceName) 
-			?? throw new InvalidOperationException("Users seed resourse file not found.");
+			?? throw new InvalidOperationException("Users seed resource file not found.");
 
-		var usersFromSeedFile = JsonSerializer.Deserialize<IEnumerable<UserSeed>>(resourceStream) ?? Enumerable.Empty<UserSeed>();
+		var usersFromSeedFile = JsonSerializer.Deserialize<IEnumerable<UserSeed>>(resourceStream)?.ToList() ?? [];
 		var users = usersFromSeedFile.Select(e => new User
 		{
 			Age = e.Age,

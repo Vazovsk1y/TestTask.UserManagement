@@ -1,5 +1,3 @@
-﻿using TestTask.Domain.Entities;
+﻿namespace TestTask.Application.Contracts;
 
-namespace TestTask.Application.Contracts;
-
-public record UserAddToRoleDTO(UserId ToId, RoleId RoleId);
+public record UserAddToRoleDTO(Guid TargetUserId, Guid RoleId);
