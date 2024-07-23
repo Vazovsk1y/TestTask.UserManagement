@@ -1,9 +1,10 @@
 using FluentValidation;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
-using TestTask.Application.Implementations;
-using TestTask.Application.Implementations.Services;
+using TestTask.Application.Implementations.Extensions;
+using TestTask.Application.Implementations.Infrastructure;
 using TestTask.DAL;
-using TestTask.WebApi;
+using TestTask.WebApi.Extensions;
+using TestTask.WebApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

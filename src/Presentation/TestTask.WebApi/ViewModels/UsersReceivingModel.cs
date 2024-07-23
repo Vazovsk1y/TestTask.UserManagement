@@ -1,6 +1,8 @@
-﻿namespace TestTask.WebApi.ViewModels;
+﻿using MikesPaging.AspNetCore.Common.ViewModels;
+
+namespace TestTask.WebApi.ViewModels;
 
 public record UsersReceivingModel(
-	UsersSortingOptionsModel SortingOptions, 
-	PagingOptionsModel? PagingOptions = null, 
-	UsersFilteringOptionsModel? FilteringOptions = null);
+	SortingOptionsModel SortingOptionsModel, 
+	PagingOptionsModel PagingOptionsModel, 
+	FilteringOptionsModel FilteringOptionsModel);

@@ -1,13 +1,6 @@
-﻿namespace TestTask.Domain.Common
-{
-	public abstract class Entity<T>
-	where T : IValueId<T>
-	{
-		public T Id { get; }
+﻿namespace TestTask.Domain.Common;
 
-		protected Entity()
-		{
-			Id = T.Create();
-		}
-	}
+public abstract class Entity<T> where T : IValueId<T>
+{
+	public T Id { get; } = T.Create();
 }

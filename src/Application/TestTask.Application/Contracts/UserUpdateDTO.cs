@@ -1,5 +1,3 @@
-﻿using TestTask.Domain.Entities;
+﻿namespace TestTask.Application.Contracts;
 
-namespace TestTask.Application.Contracts;
-
-public record UserUpdateDTO(UserId Id, string FullName, int Age);
+public record UserUpdateDTO(Guid Id, string FullName, int Age);

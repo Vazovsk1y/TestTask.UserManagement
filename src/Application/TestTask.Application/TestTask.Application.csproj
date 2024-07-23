@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\Core\TestTask.Domain\TestTask.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MikesPaging.AspNetCore" Version="1.0.3" />
+  </ItemGroup>
+
 </Project>
